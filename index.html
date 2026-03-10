@@ -16,15 +16,11 @@
     <nav>
         <h2>MENU</h2>
         <a href="#gastos">💰 GASTOS</a>
-		<div id="seccion-gastos">
-		    <h2>💰 Mis Gastos Reales</h2>
 		    <div id="tabla-gastos">Cargando datos desde la terminal de Mauricio...</div>
 		    <button onclick="cargarGastos()">🔄 Actualizar Datos</button>
-		</div>
-
 		<script>
 		async function cargarGastos() {
-		    const urlTunel = "https://maurisss-bot.localtunnel.me/ver_gastos"; // Tu URL de localtunnel
+		    const urlTunel = "https://127.0.0.1:5000"; // Tu URL de localtunnel
 		    
 		    try {
 		        const respuesta = await fetch(urlTunel);

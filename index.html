@@ -4,49 +4,71 @@
     <meta charset="UTF-8">
     <title>MAURISSS | OS</title>
     <style>
-        body { background: #0a0a0a; color: #00ff00; font-family: 'Courier New', monospace; display: flex; }
-        nav { width: 200px; border-right: 1px solid #00ff00; height: 100vh; padding: 20px; }
-        main { flex-grow: 1; padding: 20px; }
-        a { color: #00ff00; text-decoration: none; display: block; margin: 10px 0; padding: 10px; border: 1px solid transparent; }
+        body { background: #0a0a0a; color: #00ff00; font-family: 'Courier New', monospace; display: flex; margin: 0; }
+        nav { width: 250px; border-right: 1px solid #00ff00; height: 100vh; padding: 20px; box-sizing: border-box; }
+        main { flex-grow: 1; padding: 40px; }
+        a { color: #00ff00; text-decoration: none; display: block; margin: 15px 0; padding: 10px; border: 1px solid transparent; cursor: pointer; }
         a:hover { border: 1px solid #00ff00; background: #003300; }
         h1 { border-bottom: 2px solid #00ff00; padding-bottom: 10px; }
+        .seccion { display: none; } /* Escondemos todo por defecto */
+        .seccion.activa { display: block; } /* Solo mostramos la activa */
+        #tabla-gastos { border: 1px dashed #00ff00; padding: 15px; margin-top: 20px; min-height: 50px; }
     </style>
 </head>
 <body>
     <nav>
         <h2>MENU</h2>
-        <a href="#gastos">💰 GASTOS</a>
-		    <div id="tabla-gastos">Cargando datos desde la terminal de Mauricio...</div>
-		    <button onclick="cargarGastos()">🔄 Actualizar Datos</button>
-		<script>
-		async function cargarGastos() {
-		    const urlTunel = "https://127.0.0.1:5000"; // Tu URL de localtunnel
-		    
-		    try {
-		        const respuesta = await fetch(urlTunel);
-		        const htmlGastos = await respuesta.text();
-		        document.getElementById('tabla-gastos').innerHTML = htmlGastos;
-		    } catch (error) {
-		        document.getElementById('tabla-gastos').innerHTML = "❌ Error: La terminal de Córdoba está offline.";
-		        console.error("Error de conexión:", error);
-		    }
-		}
-
-		// Cargar automáticamente al entrar
-		cargarGastos();
-		</script>
-        <a href="#pelis">🎬 PELIS</a>
-        <a href="#trading">📊 TRADING</a>
-        <a href="#lab">🧪 LAB OWASP</a>
-        <a href="#camaras">📹 CAMARAS</a>
+        <a onclick="mostrar('inicio')">🏠 INICIO</a>
+        <a onclick="mostrar('gastos')">💰 GASTOS</a>
+        <a onclick="mostrar('lab')">🧪 LAB OWASP</a>
+        <a onclick="mostrar('camaras')">📹 CAMARAS</a>
     </nav>
+
     <main>
         <h1>MAURISSS DASHBOARD v1.0</h1>
-        <div id="content">
+        
+        <div id="inicio" class="seccion activa">
             <p>> Sistema iniciado correctamente...</p>
             <p>> Conexión establecida con éxito.</p>
-	    <h1>> Mira mamá, lo logré</p>
+            <h2>> Mira mamá, lo logré</h2>
         </div>
+
+        <div id="gastos" class="seccion">
+            <h3>Control de Gastos (Real-time)</h3>
+            <button onclick="cargarGastos()">🔄 Actualizar Datos desde Córdoba</button>
+            <div id="tabla-gastos">Esperando respuesta de la terminal...</div>
+        </div>
+
+        <div id="lab" class="seccion"><h3>Próximamente: Laboratorio OWASP</h3></div>
+        <div id="camaras" class="seccion"><h3>Próximamente: Cámaras de Seguridad</h3></div>
     </main>
+
+    <script>
+        // Función para cambiar de pestaña
+        function mostrar(id) {
+            // Escondemos todas las secciones
+            document.querySelectorAll('.seccion').forEach(s => s.classList.remove('activa'));
+            // Mostramos la que elegimos
+            document.getElementById(id).classList.add('activa');
+        }
+
+        async function cargarGastos() {
+            // USÁ TU URL DE LOCALTUNNEL AQUÍ (NO 127.0.0.1)
+            const urlTunel = "https://maurisss-bot.loca.lt"; 
+            const display = document.getElementById('tabla-gastos');
+            
+            display.innerHTML = "> Conectando con la terminal de Mauricio...";
+
+            try {
+                const respuesta = await fetch(urlTunel);
+                if (!respuesta.ok) throw new Error("Error en el servidor");
+                const htmlGastos = await respuesta.text();
+                display.innerHTML = htmlGastos;
+            } catch (error) {
+                display.innerHTML = "❌ Error: La terminal está offline o el túnel expiró.";
+                console.error("Error:", error);
+            }
+        }
+    </script>
 </body>
 </html>

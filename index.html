@@ -73,6 +73,13 @@
                 console.error("Error:", error);
             }
         }
+	// 1. Ejecutar apenas carga la página
+		window.onload = cargarGastos;
+
+	// 2. Ejecutar automáticamente cada 10 segundos
+		setInterval(cargarGastos, 10000); 
+
+	// 3. (Opcional) Podés borrar el botón del HTML si ya no lo querés usar
     </script>
 </body>
 </html>

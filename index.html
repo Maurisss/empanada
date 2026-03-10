@@ -36,7 +36,6 @@
 
         <div id="gastos" class="seccion">
             <h3>Control de Gastos (Real-time)</h3>
-            <button onclick="cargarGastos()">🔄 Actualizar Datos desde Córdoba</button>
             <div id="tabla-gastos">Esperando respuesta de la terminal...</div>
         </div>
 
@@ -48,31 +47,22 @@
     </main>
 
     <script>
-        // Función para cambiar de pestaña
-        function mostrar(id) {
-            // Escondemos todas las secciones
-            document.querySelectorAll('.seccion').forEach(s => s.classList.remove('activa'));
-            // Mostramos la que elegimos
-            document.getElementById(id).classList.add('activa');
-        }
+		function mostrar(id) {
+		    // 1. Escondemos todas las secciones que tengan la clase "seccion"
+		    document.querySelectorAll('.seccion').forEach(s => {
+		        s.classList.remove('activa');
+		    });
 
-        async function cargarGastos() {
-            // USÁ TU URL DE LOCALTUNNEL AQUÍ (NO 127.0.0.1)
-            const urlTunel = "https://maurisss-bot.loca.lt/ver_gastos"; 
-            const display = document.getElementById('tabla-gastos');
-            
-            display.innerHTML = "> Conectando con la terminal de Mauricio...";
-
-            try {
-                const respuesta = await fetch(urlTunel);
-                if (!respuesta.ok) throw new Error("Error en el servidor");
-                const htmlGastos = await respuesta.text();
-                display.innerHTML = htmlGastos;
-            } catch (error) {
-                display.innerHTML = "❌ Error: La terminal está offline o el túnel expiró.";
-                console.error("Error:", error);
-            }
-        }
+		    // 2. Buscamos la sección que queremos mostrar
+		    const elemento = document.getElementById(id);
+		    
+		    // 3. Si existe, le ponemos la clase "activa"
+		    if (elemento) {
+		        elemento.classList.add('activa');
+		    } else {
+		        console.error("No encontré la sección con ID: " + id);
+		    }
+		}
 	// 1. Ejecutar apenas carga la página
 		window.onload = cargarGastos;
 

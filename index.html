@@ -47,29 +47,45 @@
     </main>
 
     <script>
-		function mostrar(id) {
-		    // 1. Escondemos todas las secciones que tengan la clase "seccion"
-		    document.querySelectorAll('.seccion').forEach(s => {
-		        s.classList.remove('activa');
-		    });
 
-		    // 2. Buscamos la sección que queremos mostrar
-		    const elemento = document.getElementById(id);
-		    
-		    // 3. Si existe, le ponemos la clase "activa"
-		    if (elemento) {
-		        elemento.classList.add('activa');
-		    } else {
-		        console.error("No encontré la sección con ID: " + id);
-		    }
-		}
-	// 1. Ejecutar apenas carga la página
-		window.onload = cargarGastos;
+// 1. Función para cambiar de pestañas (la que ya tenés)
+function mostrar(id) {
+    document.querySelectorAll('.seccion').forEach(s => {
+        s.classList.remove('activa');
+    });
+    const elemento = document.getElementById(id);
+    if (elemento) {
+        elemento.classList.add('activa');
+    }
+}
 
-	// 2. Ejecutar automáticamente cada 10 segundos
-		setInterval(cargarGastos, 10000); 
+// 2. Función para traer los datos desde tu Kali en Córdoba
+async function cargarGastos() {
+    // IMPORTANTE: Esta URL debe ser la que te da LocalTunnel
+    const urlTunel = "https://maurisss-bot.loca.lt/ver_gastos"; 
+    const display = document.getElementById('tabla-gastos');
+    
+    if (!display) return; // Evita errores si no existe el div
 
-	// 3. (Opcional) Podés borrar el botón del HTML si ya no lo querés usar
-    </script>
+    try {
+        const respuesta = await fetch(urlTunel);
+        if (!respuesta.ok) throw new Error('Error en la respuesta del servidor');
+        
+        const html = await respuesta.text();
+        display.innerHTML = html; // Aquí se inyecta la tabla verde Matrix
+    } catch (error) {
+        console.error("Error de conexión:", error);
+        display.innerHTML = "<p style='color:red;'>⚠️ Terminal offline o esperando bypass...</p>";
+    }
+}
+
+// 3. Configuración de inicio y auto-refresh
+window.onload = () => {
+    mostrar('inicio'); // Empezamos en la pestaña de inicio
+    cargarGastos();    // Primera carga de datos
+    
+    // Se actualiza solo cada 15 segundos para no saturar el túnel
+    setInterval(cargarGastos, 15000); 
+};    </script>
 </body>
 </html>

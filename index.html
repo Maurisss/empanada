@@ -16,6 +16,29 @@
     <nav>
         <h2>MENU</h2>
         <a href="#gastos">💰 GASTOS</a>
+		<div id="seccion-gastos">
+		    <h2>💰 Mis Gastos Reales</h2>
+		    <div id="tabla-gastos">Cargando datos desde la terminal de Mauricio...</div>
+		    <button onclick="cargarGastos()">🔄 Actualizar Datos</button>
+		</div>
+
+		<script>
+		async function cargarGastos() {
+		    const urlTunel = "https://maurisss-bot.localtunnel.me/ver_gastos"; // Tu URL de localtunnel
+		    
+		    try {
+		        const respuesta = await fetch(urlTunel);
+		        const htmlGastos = await respuesta.text();
+		        document.getElementById('tabla-gastos').innerHTML = htmlGastos;
+		    } catch (error) {
+		        document.getElementById('tabla-gastos').innerHTML = "❌ Error: La terminal de Córdoba está offline.";
+		        console.error("Error de conexión:", error);
+		    }
+		}
+
+		// Cargar automáticamente al entrar
+		cargarGastos();
+		</script>
         <a href="#pelis">🎬 PELIS</a>
         <a href="#trading">📊 TRADING</a>
         <a href="#lab">🧪 LAB OWASP</a>
@@ -26,6 +49,7 @@
         <div id="content">
             <p>> Sistema iniciado correctamente...</p>
             <p>> Conexión establecida con éxito.</p>
+	    <h1>> Mira mamá, lo logré</p>
         </div>
     </main>
 </body>

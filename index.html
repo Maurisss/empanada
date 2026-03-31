@@ -71,7 +71,42 @@
 	</main>
 
     <script>
+// --- LOGICA PARA XSS REFLEJADO ---
+function search() {
+    const query = document.getElementById('searchInput').value;
+    // ERROR: Usar innerHTML permite que el navegador ejecute etiquetas <script>
+    document.getElementById('searchResult').innerHTML = "Resultados para: " + query;
+}
 
+// --- LOGICA PARA XSS ALMACENADO (Simulado con LocalStorage) ---
+function saveComment() {
+    const comment = document.getElementById('commentInput').value;
+    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments.push(comment);
+    localStorage.setItem('comments', JSON.stringify(comments));
+    displayComments();
+}
+
+function displayComments() {
+    const list = document.getElementById('commentList');
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    // ERROR: Renderizamos el texto directamente como HTML
+    list.innerHTML = comments.map(c => `<div class="comment">${c}</div>`).join('');
+}
+// Cargar al inicio
+displayComments();
+
+// --- LOGICA PARA XSS DOM-BASED ---
+function checkDOM() {
+    // Lee lo que hay después del # en la URL
+    const hashData = decodeURIComponent(window.location.hash.substring(1));
+    if (hashData) {
+        // ERROR: Escribe directamente del hash al DOM sin filtrar
+        document.getElementById('userName').innerHTML = hashData;
+    }
+}
+window.addEventListener('hashchange', checkDOM);
+checkDOM();
 // 1. Función para cambiar de pestañas (la que ya tenés)
 function mostrar(id) {
     document.querySelectorAll('.seccion').forEach(s => {
@@ -110,6 +145,8 @@ window.onload = () => {
     
     // Se actualiza solo cada 15 segundos para no saturar el túnel
     setInterval(cargarGastos, 15000); 
-};    </script>
+};
+	
+    </script>
 </body>
 </html>

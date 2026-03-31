@@ -23,52 +23,52 @@
         <a onclick="mostrar('trading')">🧪 TRADING</a>
         <a onclick="mostrar('pelis')">📹 Peliculas</a>
 	<a onclick="mostrar('camaras')">📹 CAMARAS</a>
-	<a onclick="mostrar('hacking etico')">📹 Hacking</a>
+	<a onclick="mostrar('hacking')">📹 Hacking</a>
     </nav>
-<main>
-    <h1>MAURISSS DASHBOARD v1.0</h1>
-    
-    <div id="inicio" class="seccion activa">
-        <p>> Sistema iniciado correctamente...</p>
-        <p>> Conexión establecida con éxito.</p>
-        <h2>> Mira mamá, lo logré</h2>
-    </div>
+	<main>
+	    <h1>MAURISSS DASHBOARD v1.0</h1>
+	    
+	    <div id="inicio" class="seccion activa">
+	        <p>> Sistema iniciado correctamente...</p>
+	        <p>> Conexión establecida con éxito.</p>
+	        <h2>> Mira mamá, lo logré</h2>
+	    </div>
 
-    <div id="gastos" class="seccion">
-        <h3>Control de Gastos (Real-time)</h3>
-        <div id="tabla-gastos">Esperando respuesta de la terminal...</div>
-    </div>
+	    <div id="gastos" class="seccion">
+	        <h3>Control de Gastos (Real-time)</h3>
+	        <div id="tabla-gastos">Esperando respuesta de la terminal...</div>
+	    </div>
 
-    <div id="trading" class="seccion"><h3>Próximamente: trading</h3></div>
-    <div id="camaras" class="seccion"><h3>Próximamente: Cámaras de Seguridad</h3></div>
-    
-    <div id="pelis" class="seccion"><h3>Próximamente: pelis</h3></div>
+	    <div id="trading" class="seccion"><h3>Próximamente: trading</h3></div>
+	    <div id="camaras" class="seccion"><h3>Próximamente: Cámaras de Seguridad</h3></div>
+	    
+	    <div id="pelis" class="seccion"><h3>Próximamente: pelis</h3></div>
 
-    <div id="hacking etico" class="seccion">
-        <h2>🧪 XSS Practice Lab</h2>
-        <hr>
+	    <div id="hacking" class="seccion">
+	        <h2>🧪 XSS Practice Lab</h2>
+	        <hr>
 
-        <section>
-            <h3>1. XSS Reflejado (Buscador)</h3>
-            <input type="text" id="searchInput" placeholder="Buscar productos...">
-            <button onclick="search()">Buscar</button>
-            <p id="searchResult"></p>
-        </section>
+	        <section>
+	            <h3>1. XSS Reflejado (Buscador)</h3>
+	            <input type="text" id="searchInput" placeholder="Buscar productos...">
+	            <button onclick="search()">Buscar</button>
+	            <p id="searchResult"></p>
+	        </section>
 
-        <section>
-            <h3>2. XSS Almacenado (Libro de Visitas)</h3>
-            <textarea id="commentInput" placeholder="Dejá tu comentario..."></textarea>
-            <button onclick="saveComment()">Publicar</button>
-            <div id="commentList"></div>
-        </section>
+	        <section>
+	            <h3>2. XSS Almacenado (Libro de Visitas)</h3>
+	            <textarea id="commentInput" placeholder="Dejá tu comentario..."></textarea>
+	            <button onclick="saveComment()">Publicar</button>
+	            <div id="commentList"></div>
+	        </section>
 
-        <section>
-            <h3>3. XSS basado en DOM (Perfil)</h3>
-            <p>Tu nombre de usuario es: <span id="userName">Invitado</span></p>
-            <p><small>Pista: Cambiá el fragmento de la URL después del #</small></p>
-        </section>
-    </div>
-</main>
+	        <section>
+	            <h3>3. XSS basado en DOM (Perfil)</h3>
+	            <p>Tu nombre de usuario es: <span id="userName">Invitado</span></p>
+	            <p><small>Pista: Cambiá el fragmento de la URL después del #</small></p>
+	        </section>
+	    </div>
+	</main>
 
     <script>
 

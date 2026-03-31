@@ -1,0 +1,9 @@
+2026/03/10-17:36:56.024 29d4 Reusing MANIFEST /root/empanada/.wwebjs_auth/session/Default/Local Storage/leveldb/MANIFEST-000001
+2026/03/10-17:36:56.029 29d4 Recovering log #4
+2026/03/10-17:36:56.031 29d4 Reusing old log /root/empanada/.wwebjs_auth/session/Default/Local Storage/leveldb/000004.log 
+2026/03/10-17:37:56.037 29d9 Level-0 table #8: started
+2026/03/10-17:37:56.111 29d9 Level-0 table #8: 16940 bytes OK
+2026/03/10-17:37:56.121 29d9 Delete type=0 #4
+2026/03/10-22:37:46.613 29d4 Level-0 table #10: started
+2026/03/10-22:37:46.648 29d4 Level-0 table #10: 17547 bytes OK
+2026/03/10-22:37:46.669 29d4 Delete type=0 #7
